@@ -1,0 +1,21 @@
+version: '3'
+services:
+  api:
+    image: url-shortener-api:latest
+    container_name: api
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      ConnectionStrings__PostgreSql: Host=db;Database=url_shortener_db;Username=postgres;Password=postgres
+    ports:
+      - 8080:8080
+    restart: on-failure
+  db:
+    image: postgres:16.2
+    container_name: database
+    environment:
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: postgres
+    ports:
+      - 5432:5432
