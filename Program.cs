@@ -54,5 +54,17 @@ app.MapPost("/v1/short", async (CreateShortUrlDto createShortUrlDto, IUrlReposit
     return Results.Ok(url);
 });
 
+app.MapGet("/healthz", async (ApplicationDbContext dbContext) =>
+{
+    await dbContext.Database
+        .ExecuteSqlRawAsync("SELECT 1")
+        .ConfigureAwait(false);
+
+    return Results.Ok(new
+    {
+        Success = true,
+    });
+});
+
 app.Run();
 
