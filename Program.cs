@@ -9,7 +9,7 @@ using UrlShortener.Services;
 
 var builder = WebApplication.CreateSlimBuilder(args);
 
-builder.Services.AddDbContext<ApplicationDbContext>(options =>
+builder.Services.AddDbContextPool<ApplicationDbContext>(options =>
 {
     options.UseNpgsql(builder.Configuration.GetConnectionString("PostgreSql"));
 });
