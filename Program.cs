@@ -11,6 +11,7 @@ var builder = WebApplication.CreateSlimBuilder(args);
 
 builder.Services.AddDbContextPool<ApplicationDbContext>(options =>
 {
+    options.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
     options.UseNpgsql(builder.Configuration.GetConnectionString("PostgreSql"));
 });
 
